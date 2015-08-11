@@ -12,11 +12,13 @@ describe("cache", function() {
   var server;
 
   afterEach(function() {
-    server.close();
+    if(server) {
+      server.close();
+    }
   });
 
 
-  it("should return data from cache", function(done) {
+  it("should fail because no allow/deny option are supplied", function(done) {
     var options = {
       port: 8888,
       logfile: path.join(__dirname, "..", "tmp", "clyde.log"),
@@ -24,98 +26,187 @@ describe("cache", function() {
 
       prefilters: [
         {
-          id: "cache",
-          path: path.join(__dirname, "../lib/index.js")
-        }
-      ],
-
-      providers: [
-        {
-          id: "id",
-          context: "/provider",
-          target: "http://localhost:8888"
-        }
-      ]
-    };
-
-    // Create server with clyde's middleware options
-    var middleware = clyde.createMiddleware(options);
-    server = http.createServer(middleware);
-    server.listen(options.port);
-
-    // Make request which expects a 404 error
-    request("http://localhost:8888")
-      .get("/foo?query=1")
-      .end(function(err, res) {
-        // .expect() doesn't work because we are getting a 404 error and using
-        // the .end() method too. So we need to make by hand
-        expect(res.statusCode).to.be.equal(404);
-        expect(res.headers["x-cache"]).to.be.equal("MISS");
-
-        // Make a second request
-        request("http://localhost:8888")
-          .get("/foo?query=1")
-          .expect("X-Cache", "HIT")
-          .expect(404, done);
-      });
-  });
-
-  it("should return two MISS and cache data using the ignoreQuery property to false", function(done) {
-    var options = {
-      port: 8888,
-      logfile: path.join(__dirname, "..", "tmp", "clyde.log"),
-      loglevel: "info",
-
-      prefilters: [
-        {
-          id: "cache",
-          path: path.join(__dirname, "../lib/index.js"),
-        }
-      ],
-
-      providers: [
-        {
-          id: "id",
-          context: "/provider",
-          target: "http://localhost:8888"
-        }
-      ]
-    };
-
-    // Create server with clyde's middleware options
-    var middleware = clyde.createMiddleware(options);
-    server = http.createServer(middleware);
-    server.listen(options.port);
-
-    // Make request which expects a 404 error
-    request("http://localhost:8888")
-      .get("/foo?query=1")
-      .end(function(err, res) {
-        // .expect() doesn't work because we are getting a 404 error and using
-        // the .end() method too. So we need to make by hand
-        expect(res.statusCode).to.be.equal(404);
-        expect(res.headers["x-cache"]).to.be.equal("MISS");
-
-        // Make a second request
-        request("http://localhost:8888")
-          .get("/foo?query=2&param=a")
-          .expect("X-Cache", "MISS")
-          .expect(404, done);
-      });
-  });
-
-  it("should return data from cache using the ignoreQuery property to true", function(done) {
-    var options = {
-      port: 8888,
-      logfile: path.join(__dirname, "..", "tmp", "clyde.log"),
-      loglevel: "info",
-
-      prefilters: [
-        {
-          id: "cache",
+          id: "query-filter",
           path: path.join(__dirname, "../lib/index.js"),
           config: {
-            ignoreQuery: true
+          }
+        }
+      ],
+
+      providers: [
+        {
+          id: "id",
+          context: "/provider",
+          target: "http://localhost:8888"
+        }
+      ]
+    };
+
+    try {
+      clyde.createMiddleware(options);
+    } catch(err) {
+      expect(err.message).to.contains("query-filter");
+      done();
+    }
+  });
+
+
+  it("should fail because no any/all option are supplied within deny option", function(done) {
+    var options = {
+      port: 8888,
+      logfile: path.join(__dirname, "..", "tmp", "clyde.log"),
+      loglevel: "info",
+
+      prefilters: [
+        {
+          id: "query-filter",
+          path: path.join(__dirname, "../lib/index.js"),
+          config: {
+            deny: {}
+          }
+        }
+      ],
+
+      providers: [
+        {
+          id: "id",
+          context: "/provider",
+          target: "http://localhost:8888"
+        }
+      ]
+    };
+
+    try {
+      clyde.createMiddleware(options);
+    } catch(err) {
+      expect(err.message).to.contains("query-filter");
+      done();
+    }
+  });
+
+
+  it("should fail because both any/all options are supplied within deny option", function(done) {
+    var options = {
+      port: 8888,
+      logfile: path.join(__dirname, "..", "tmp", "clyde.log"),
+      loglevel: "info",
+
+      prefilters: [
+        {
+          id: "query-filter",
+          path: path.join(__dirname, "../lib/index.js"),
+          config: {
+            deny: {
+              all: [],
+              any: []
+            }
+          }
+        }
+      ],
+
+      providers: [
+        {
+          id: "id",
+          context: "/provider",
+          target: "http://localhost:8888"
+        }
+      ]
+    };
+
+    try {
+      clyde.createMiddleware(options);
+    } catch(err) {
+      expect(err.message).to.contains("query-filter");
+      done();
+    }
+  });
+
+
+  it("should fail because no any/all option are supplied within allow option", function(done) {
+    var options = {
+      port: 8888,
+      logfile: path.join(__dirname, "..", "tmp", "clyde.log"),
+      loglevel: "info",
+
+      prefilters: [
+        {
+          id: "query-filter",
+          path: path.join(__dirname, "../lib/index.js"),
+          config: {
+            allow: {}
+          }
+        }
+      ],
+
+      providers: [
+        {
+          id: "id",
+          context: "/provider",
+          target: "http://localhost:8888"
+        }
+      ]
+    };
+
+    try {
+      clyde.createMiddleware(options);
+    } catch(err) {
+      expect(err.message).to.contains("query-filter");
+      done();
+    }
+  });
+
+
+  it("should fail because both any/all options are supplied within allow option", function(done) {
+    var options = {
+      port: 8888,
+      logfile: path.join(__dirname, "..", "tmp", "clyde.log"),
+      loglevel: "info",
+
+      prefilters: [
+        {
+          id: "query-filter",
+          path: path.join(__dirname, "../lib/index.js"),
+          config: {
+            allow: {
+              all: [],
+              any: []
+            }
+          }
+        }
+      ],
+
+      providers: [
+        {
+          id: "id",
+          context: "/provider",
+          target: "http://localhost:8888"
+        }
+      ]
+    };
+
+    try {
+      clyde.createMiddleware(options);
+    } catch(err) {
+      expect(err.message).to.contains("query-filter");
+      done();
+    }
+  });
+
+
+  it("should allow pass the request because has some parameter", function(done) {
+    var options = {
+      port: 8888,
+      logfile: path.join(__dirname, "..", "tmp", "clyde.log"),
+      loglevel: "info",
+
+      prefilters: [
+        {
+          id: "query-filter",
+          path: path.join(__dirname, "../lib/index.js"),
+          config: {
+            allow: {
+              any: ["a", "b", "c"]
+            }
           }
         }
       ],
@@ -136,19 +227,9 @@ describe("cache", function() {
 
     // Make request which expects a 404 error
     request("http://localhost:8888")
-      .get("/foo?query=1")
-      .end(function(err, res) {
-        // .expect() doesn't work because we are getting a 404 error and using
-        // the .end() method too. So we need to make by hand
-        expect(res.statusCode).to.be.equal(404);
-        expect(res.headers["x-cache"]).to.be.equal("MISS");
-
-        // Make a second request
-        request("http://localhost:8888")
-          .get("/foo?query=2&param=a")
-          .expect("X-Cache", "HIT")
-          .expect(404, done);
-      });
+      .get("/foo?a")
+      .expect(40, done);
   });
+
 
 });
