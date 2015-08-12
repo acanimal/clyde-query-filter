@@ -1,8 +1,8 @@
-# UR Query Filter
+# URL Query Filter
 
 URL query filter implementation for Clyde API gateway. This filter allows or denies requests depending on its query parameters.
 
-<!-- TOC depth:6 withLinks:1 updateOnSave:0 orderedList:0 -->
+<!-- TOC depth:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
 - [UR Query Filter](#ur-query-filter)
 	- [Configuration](#configuration)
