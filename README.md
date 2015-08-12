@@ -1,8 +1,6 @@
 # UR Query Filter
 
-UR query filter implementation for Clyde API gateway. This filter allows to allow or deny requests depending on its query parameters.
-
-
+URL query filter implementation for Clyde API gateway. This filter allows or denies requests depending on its query parameters.
 
 <!-- MarkdownTOC -->
 
@@ -15,7 +13,90 @@ UR query filter implementation for Clyde API gateway. This filter allows to allo
 
 ## Configuration
 
+The configuration is flexible enough so, given an array of parameters names, indicate if we can allow or deny the request depending on if all parameters or any are present in the request's query. The allows properties are:
+
+* `allow`: Only accepts the requests that complies with the conditions.
+* `deny`: Blocks all the request that complies with the condition.
+
+In both cases conditions can be specified indicating an array of parameters names that must mach `all` or `any` with the request parameters.
+
 ## Examples
+
+### Allow only requests that contains the parameters `a`, `b` and `c`.
+
+```javascript
+{
+  prefilters: [
+    {
+      id: "query-filter",
+      path: "clydeio-query-filter",
+      config: {
+        allow: {
+          all: ["a", "b", "c"]
+        }
+      }
+    }
+  ],
+  ...
+}
+```
+
+### Allow any request that contains any of the parameters `a`, `b` or `c`.
+
+```javascript
+{
+  prefilters: [
+    {
+      id: "query-filter",
+      path: "clydeio-query-filter",
+      config: {
+        allow: {
+          any: ["a", "b", "c"]
+        }
+      }
+    }
+  ],
+  ...
+}
+```
+
+### Deny the requests that contains the parameters `a`, `b` and `c`.
+
+```javascript
+{
+  prefilters: [
+    {
+      id: "query-filter",
+      path: "clydeio-query-filter",
+      config: {
+        deny: {
+          all: ["a", "b", "c"]
+        }
+      }
+    }
+  ],
+  ...
+}
+```
+
+### Deny any request that contains any of the parameters `a`, `b` or `c`.
+
+```javascript
+{
+  prefilters: [
+    {
+      id: "query-filter",
+      path: "clydeio-query-filter",
+      config: {
+        deny: {
+          any: ["a", "b", "c"]
+        }
+      }
+    }
+  ],
+  ...
+}
+```
 
 ### Global cache with default configuration
 

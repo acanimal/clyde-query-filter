@@ -1,6 +1,6 @@
 {
   "author": "Antonio Santiago <asantiagop@gmail.com> (http://acuriousanimal.com/blog)",
-  "name": "clydeio-query",
+  "name": "clydeio-query-filter",
   "homepage": "https://github.com/acanimal/clyde-query-filter",
   "description": "URL query filter for Clyde API gateway.",
   "keywords": [
