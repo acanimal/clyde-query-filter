@@ -2,7 +2,7 @@
 
 URL query filter implementation for Clyde API gateway. This filter allows or denies requests depending on its query parameters.
 
-<!-- TOC depth:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<!-- TOC depth:6 withLinks:1 updateOnSave:0 orderedList:0 -->
 
 - [UR Query Filter](#ur-query-filter)
 	- [Configuration](#configuration)
@@ -14,6 +14,7 @@ URL query filter implementation for Clyde API gateway. This filter allows or den
 		- [Global cache with default configuration](#global-cache-with-default-configuration)
 	- [Notes](#notes)
 - [License](#license)
+
 <!-- /TOC -->
 
 ## Configuration
