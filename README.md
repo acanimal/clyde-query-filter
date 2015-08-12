@@ -2,14 +2,19 @@
 
 URL query filter implementation for Clyde API gateway. This filter allows or denies requests depending on its query parameters.
 
-<!-- MarkdownTOC -->
+<!-- TOC depth:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
-- Configuration
-  - Examples
-  - Notes
-- License
-
-<!-- /MarkdownTOC -->
+- [UR Query Filter](#ur-query-filter)
+	- [Configuration](#configuration)
+	- [Examples](#examples)
+		- [Allow only requests that contains the parameters `a`, `b` and `c`.](#allow-only-requests-that-contains-the-parameters-a-b-and-c)
+		- [Allow any request that contains any of the parameters `a`, `b` or `c`.](#allow-any-request-that-contains-any-of-the-parameters-a-b-or-c)
+		- [Deny the requests that contains the parameters `a`, `b` and `c`.](#deny-the-requests-that-contains-the-parameters-a-b-and-c)
+		- [Deny any request that contains any of the parameters `a`, `b` or `c`.](#deny-any-request-that-contains-any-of-the-parameters-a-b-or-c)
+		- [Global cache with default configuration](#global-cache-with-default-configuration)
+	- [Notes](#notes)
+- [License](#license)
+<!-- /TOC -->
 
 ## Configuration
 
