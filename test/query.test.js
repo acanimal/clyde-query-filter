@@ -12,7 +12,7 @@ describe("cache", function() {
   var server;
 
   afterEach(function() {
-    if(server) {
+    if (server) {
       server.close();
     }
   });
@@ -62,7 +62,7 @@ describe("cache", function() {
           id: "query-filter",
           path: path.join(__dirname, "../lib/index.js"),
           config: {
-            deny: {}
+            deny: {}
           }
         }
       ],
@@ -96,7 +96,7 @@ describe("cache", function() {
           id: "query-filter",
           path: path.join(__dirname, "../lib/index.js"),
           config: {
-            deny: {
+            deny: {
               all: [],
               any: []
             }
@@ -133,7 +133,7 @@ describe("cache", function() {
           id: "query-filter",
           path: path.join(__dirname, "../lib/index.js"),
           config: {
-            allow: {}
+            allow: {}
           }
         }
       ],
@@ -167,7 +167,7 @@ describe("cache", function() {
           id: "query-filter",
           path: path.join(__dirname, "../lib/index.js"),
           config: {
-            allow: {
+            allow: {
               all: [],
               any: []
             }
@@ -206,7 +206,7 @@ describe("cache", function() {
             id: "query-filter",
             path: path.join(__dirname, "../lib/index.js"),
             config: {
-              allow: {
+              allow: {
                 any: ["a", "b", "c"]
               }
             }
@@ -245,7 +245,7 @@ describe("cache", function() {
             id: "query-filter",
             path: path.join(__dirname, "../lib/index.js"),
             config: {
-              allow: {
+              allow: {
                 any: ["a", "b"]
               }
             }
@@ -283,7 +283,7 @@ describe("cache", function() {
             id: "query-filter",
             path: path.join(__dirname, "../lib/index.js"),
             config: {
-              allow: {
+              allow: {
                 all: ["a", "b", "c"]
               }
             }
@@ -322,7 +322,7 @@ describe("cache", function() {
             id: "query-filter",
             path: path.join(__dirname, "../lib/index.js"),
             config: {
-              allow: {
+              allow: {
                 all: ["a", "b", "c"]
               }
             }
@@ -364,7 +364,7 @@ describe("cache", function() {
             id: "query-filter",
             path: path.join(__dirname, "../lib/index.js"),
             config: {
-              deny: {
+              deny: {
                 any: ["a", "b", "c"]
               }
             }
@@ -403,7 +403,7 @@ describe("cache", function() {
             id: "query-filter",
             path: path.join(__dirname, "../lib/index.js"),
             config: {
-              deny: {
+              deny: {
                 any: ["a", "b"]
               }
             }
@@ -441,7 +441,7 @@ describe("cache", function() {
             id: "query-filter",
             path: path.join(__dirname, "../lib/index.js"),
             config: {
-              deny: {
+              deny: {
                 all: ["a", "b", "c"]
               }
             }
@@ -480,7 +480,7 @@ describe("cache", function() {
             id: "query-filter",
             path: path.join(__dirname, "../lib/index.js"),
             config: {
-              deny: {
+              deny: {
                 all: ["a", "b", "c"]
               }
             }
