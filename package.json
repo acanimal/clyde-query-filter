@@ -1,10 +1,10 @@
 {
-  "author": "Antonio Santiago <asantiagop@gmail.com> (http://acuriousanimal.com/blog)",
+  "author": "Antonio Santiago <asantiagop@gmail.com> (http://acuriousanimal.com)",
   "name": "clydeio-query-filter",
-  "homepage": "https://github.com/clydeio/clyde-query-filter",
+  "homepage": "https://github.com/clydeio/clydeio-query-filter",
   "description": "URL query filter for Clyde API gateway.",
   "keywords": [
-    "clyde",
+    "clydeio",
     "filter",
     "url",
     "filter",
@@ -14,7 +14,7 @@
   "version": "0.1.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/clydeio/clyde-query-filter.git"
+    "url": "https://github.com/clydeio/clydeio-query-filter.git"
   },
   "main": "./lib/index.js",
   "directories": {

@@ -2,9 +2,10 @@
 
 URL query filter implementation for Clyde API gateway. This filter allows or denies requests depending on its query parameters.
 
-<!-- TOC depth:6 withLinks:1 updateOnSave:0 orderedList:0 -->
+<!-- TOC depth:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
 - [URL Query Filter](#url-query-filter)
+	- [Installation](#installation)
 	- [Configuration](#configuration)
 	- [Examples](#examples)
 		- [Allow only requests that contains the parameters `a`, `b` and `c`.](#allow-only-requests-that-contains-the-parameters-a-b-and-c)
@@ -16,6 +17,10 @@ URL query filter implementation for Clyde API gateway. This filter allows or den
 - [License](#license)
 
 <!-- /TOC -->
+
+## Installation
+
+`npm install clydeio-query-filter --save`
 
 ## Configuration
 
